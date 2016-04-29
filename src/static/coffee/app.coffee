@@ -1,4 +1,3 @@
-RGB = [200, 120, 255]
 
 if window.XMLHttpRequest is undefined
     window.XMLHttpRequest = ()->
@@ -27,6 +26,14 @@ get = (url, callback)->
     return request.send(null)
 
 
+getRgb = (variance)->
+    hue = Math.abs(variance)
+    if variance < 0
+        return "rgb(255, #{225 - hue}, #{225 - hue})"
+    if hue < 50
+        return "rgb( #{255-(hue*5)}, 255, #{255-(hue*5)})"
+    return "rgb(0, #{200 - Math.min(150, hue)}, 0)"
+
 getCell = (oProduct, competitor)->
     tdE = document.createElement("td")
     store = oProduct[competitor] or {}
@@ -34,7 +41,7 @@ getCell = (oProduct, competitor)->
     if store.price
       variance = Math.floor(store.variance)
       tdE.innerHTML = "#{Math.floor(store.price)} $ (#{variance})"
-      tdE.style.backgroundColor = "rgb(#{RGB[0] + variance}, #{RGB[1] + variance}, #{RGB[2]})"
+      tdE.style.backgroundColor = getRgb(variance)
     else
       tdE.innerHTML = " "
 
