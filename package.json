@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "pretest": "./build.sh",
-    "test": "./test.sh"
+    "test": "./test.sh",
+    "start": "NODE_ENV=dev node webserver.js"
   },
   "dependencies": {
     "body-parser": "~1.12.0",
