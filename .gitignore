@@ -1,0 +1,7 @@
+build
+node_modules
+src/node_modules
+test/*.js
+src/package.json
+src/npm-debug.log
+npm-debug.log
