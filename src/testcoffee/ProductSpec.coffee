@@ -1,3 +1,8 @@
+#
+# Products Spec
+# -- Unit and Integration spec of Product is added here
+#
+
 process.env.NODE_ENV = "test"
 assert = require("chai").assert
 UtLib = require("./UtLib")
@@ -17,6 +22,9 @@ describe "Products Spec/ ", ->
     return UtLib.testSetupDeinit(done)
   )
 
+  #
+  # Products Unit test suite
+  #
   describe "Unit Test", ->
 
     it "Should Calulate Product Variance", (done)->
@@ -32,5 +40,7 @@ describe "Products Spec/ ", ->
         res = { send: verifyCb } # VerifyCb is attached as res.send method for testing purpose
         return routeUtil.calculateVariance(req, res)
 
-
+  #
+  # Products Unit test suite
+  # TODO:
   describe "GUI Integration Test", ->

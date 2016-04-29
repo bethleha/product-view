@@ -12,7 +12,9 @@ if window.XMLHttpRequest is undefined
                 # ... Otherwise throw an error
                 return new Error("XMLHttpRequest is not supported")
 
-
+#
+# Function to GET a REST API
+#
 get = (url, callback)->
     request = new XMLHttpRequest()
     request.open("GET", url)
@@ -25,7 +27,9 @@ get = (url, callback)->
 
     return request.send(null)
 
-
+#
+# Function to get rgb() value for variance
+#
 getRgb = (variance)->
     hue = Math.abs(variance)
     if variance < 0
@@ -34,6 +38,14 @@ getRgb = (variance)->
         return "rgb( #{255-(hue*5)}, 255, #{255-(hue*5)})"
     return "rgb(0, #{200 - Math.min(150, hue)}, 0)"
 
+#
+# Function to generate product-category-variance cell
+# STEPS:
+#   1. Create td element
+#   2. For a competitor;
+#       - add store-price
+#       - add variance-heat-color
+#
 getCell = (oProduct, competitor)->
     tdE = document.createElement("td")
     store = oProduct[competitor] or {}
@@ -47,7 +59,13 @@ getCell = (oProduct, competitor)->
 
     return tdE
 
-
+#
+# Function to prepare Product Variance Heatmap
+# STEPS:
+#   1. Get HeatMap element (table)
+#   2. Add table-header of competitors
+#   3. Add category variance rows for each product-category 
+#
 prepareProductView = (data)->
     tableE = document.getElementById("productVarianceTable")
     rowE = document.createElement("tr")
