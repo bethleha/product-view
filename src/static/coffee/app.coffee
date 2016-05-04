@@ -7,7 +7,7 @@ if window.XMLHttpRequest is undefined
         catch e
             try
                 # ... Otherwise fall back on older version
-                return new ActiveXObject("Msxml2.XMLHTTP.6.0")
+                return new ActiveXObject("Msxml2.XMLHTTP.3.0")
             catch e
                 # ... Otherwise throw an error
                 return new Error("XMLHttpRequest is not supported")

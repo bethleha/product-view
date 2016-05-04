@@ -25,12 +25,12 @@ UtLib = {
 
     testSetupDeinit: (done)->
 
-        if (UtLib._server)
+        if (UtLib._server)  # UtLib._server will explicitely be set on starting web-server by this test-env
             UtLib._server.removeAllListeners()
             return UtLib._server.close()
 
         productsColl = UtLib.db.collection("products")
-        productsColl.drop((err)->
+        productsColl.drop((err)->   # Drop the sample-import-data on exit (clean-up)
             if err then return done(err)
 
             UtLib.db.close(true, done)

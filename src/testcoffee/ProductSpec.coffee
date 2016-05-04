@@ -14,10 +14,18 @@ noop = ->
 
 describe "Products Spec/ ", ->
 
+  # BEFORE: Prepare test-env by UtLib.testSetupInit
+  #   1. Connect to MongoDB
+  #   2. Load expApp (But Not started; For future use)
+  #   3. Import sample-data to mongodb
   before((done)->
     return UtLib.testSetupInit(done)
   )
 
+  # AFTER: Cleanup test-env by UtLib.testSetupDeinit
+  #   1. If test-server is set-up(explicitly) it stops
+  #   2. Drops imported-test-data
+  #   3. Closes database connection
   after((done)->
     return UtLib.testSetupDeinit(done)
   )
@@ -25,10 +33,15 @@ describe "Products Spec/ ", ->
   #
   # Products Unit test suite
   #
-  describe "Unit Test", ->
+  describe "Unit Test/ ", ->
 
     it "Should Calulate Product Variance", (done)->
 
+        # Basic verification asserts
+        #  - resp.errorCode is OK
+        #  - valid resp.result object
+        #  - valid products in resp.result
+        #  - valid competitors in resp.result
         verifyCb = (resp)->
           assert.equal resp.errorCode, OK
           assert.isObject resp.result
@@ -41,6 +54,7 @@ describe "Products Spec/ ", ->
         return routeUtil.calculateVariance(req, res)
 
   #
-  # Products Unit test suite
+  # Products Integration test-suite
+  #  - will make rest-api call and assert results(Use UtLib Methods to make rest-api-call)
   # TODO:
-  describe "GUI Integration Test", ->
+  describe "GUI Integration Test/ ", ->
